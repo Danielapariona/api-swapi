@@ -1,4 +1,4 @@
-// https://swapi.co/api/people/?search=r2
+// https://swapi.co/api/people/?search=luke
 const url = 'https://swapi.co/api/people/';
 
 const containerResults = $('.results-swapi-js');
@@ -30,7 +30,7 @@ function parseJSON(res) {
         const name = data[i].name;
         const url = data[i].url;
         containerResults.append(`
-        <div class="column">
+        <div class="column card-js">
           <div class="ui fluid card" data-url="${url}">
             <div class="image">
               <img src="assets/images/image.png">
@@ -72,7 +72,7 @@ function updateInfo(res) {
 }
 
 function data(dataModal) {
-  console.log(dataModal);
+  // console.log(dataModal);
   // Selectores
   const headerModal = $('.ui.header');
   const birthYear = $('#birth-year');
@@ -92,3 +92,40 @@ function data(dataModal) {
   mass.text(dataModal.mass);
   skinColor.text(dataModal.skin_color);
 }
+
+function searchCharacter() {
+  $('#btn-search-js').on('click', function () {
+    const valueSearch = $('#search-character-js').val();
+    const search = `https://swapi.co/api/people/?search=${valueSearch}`;
+    // https://swapi.co/api/people/?search=luke
+    fetch(search)
+      .then(function (res) {
+        return res.json()
+          .then(function (parsedData) {
+            // console.log(parsedData.results);
+            const data = parsedData.results
+            for (let i in data) {
+              console.log(data[i]);
+              const name = data[i].name;
+              const url = data[i].url;
+              const $elements = $('.card-js');
+              $elements.detach();
+              containerResults.append(`
+              <div class="column card-js">
+                <div class="ui fluid card" data-url="${url}">
+                  <div class="image">
+                    <img src="assets/images/image.png">
+                  </div>
+                  <div class="content">
+                    <a class="header">${name}</a>
+                  </div>
+                </div>
+              </div>`);
+            }
+          })
+          .then(modalShow);
+      });
+  });
+}
+
+searchCharacter();

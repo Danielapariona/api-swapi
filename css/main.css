@@ -1,0 +1,22 @@
+header {
+  padding: 2rem;
+  background-color: #40C7CA;
+  background-image: url("../assets/images/background.gif");
+}
+
+body {
+  background-color: #efefef;
+}
+
+.ui.header {
+  color: white;
+}
+
+.brand-img {
+  width: 18rem;
+  margin: 25px 0;
+}
+
+.ui.fluid.card {
+  box-shadow: 2px 2px 8px #848181;
+}

@@ -7,18 +7,27 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="vendors/semantic/semantic.min.css">
   <link rel="stylesheet" href="css/main.css">
-  <title>Document</title>
+  <title>Swapi</title>
 </head>
 
 <body>
-  <h1>Swapi</h1>
   <section>
-    <h3>Personajes de Stars Wars</h3>
-    <div class="ui four column grid stackable results-swapi-js">
+    <div class="ui container center aligned">
+        <h1 class="ui center aligned header">Personajes de Star Wars</h1>
+      <div class="ui search">
+        <div class="ui icon input">
+          <input class="prompt" type="text" placeholder="Search character...">
+          <i class="search icon"></i>
+        </div>
+        <button class="ui primary button">Buscar</button>
+      </div>
+      <br>
+      <br>
+      <div class="ui four column grid stackable results-swapi-js">
+      </div>
     </div>
+    <br>
   </section>
-  <br>
-  <br>
   <div class="ui tiny modal ">
     <!-- <i class="close icon"></i> -->
     <div class="image content">
@@ -27,13 +36,27 @@
       </div>
       <div class="description">
         <div class="ui header">Default Profile Image</div>
-        <strong>Birth Year: </strong><span id="birth-year">-</span><br>
-        <strong>Eye Color: </strong><span id="eye-color">-</span><br>
-        <strong>Gender: </strong><span id="gender">-</span><br>
-        <strong>Hair Color: </strong><span id="hair-color">-</span><br>
-        <strong>Height: </strong><span id="height">-</span><br>
-        <strong>Mass: </strong><span id="mass">-</span><br>
-        <strong>Skin Color: </strong><span id="skin-color">-</span><br>
+        <strong>Birth Year: </strong>
+        <span id="birth-year">-</span>
+        <br>
+        <strong>Eye Color: </strong>
+        <span id="eye-color">-</span>
+        <br>
+        <strong>Gender: </strong>
+        <span id="gender">-</span>
+        <br>
+        <strong>Hair Color: </strong>
+        <span id="hair-color">-</span>
+        <br>
+        <strong>Height: </strong>
+        <span id="height">-</span>
+        <br>
+        <strong>Mass: </strong>
+        <span id="mass">-</span>
+        <br>
+        <strong>Skin Color: </strong>
+        <span id="skin-color">-</span>
+        <br>
       </div>
     </div>
   </div>
@@ -42,7 +65,6 @@
 
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <script src="vendors/semantic/semantic.min.js"></script>
-  <script src="js/effects.js"></script>
   <script src="js/app.js"></script>
 </body>
 

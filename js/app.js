@@ -11,7 +11,6 @@ $(document).ready(function () {
     .then(parseJSON)
     .then(modalShow)
     .catch(displayErrors);
-
 });
 
 function handleErrors(res) {
@@ -40,8 +39,7 @@ function parseJSON(res) {
               <a class="header">${name}</a>
             </div>
           </div>
-        </div>`
-        );
+        </div>`);
       }
     })
 }

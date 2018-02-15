@@ -1,4 +1,4 @@
-// https://swapi.co/api/people/?search=luke
+// https://swapi.co/api/people/?page=1
 const url = 'https://swapi.co/api/people/';
 
 const containerResults = $('.results-swapi-js');
@@ -25,20 +25,41 @@ function parseJSON(res) {
   return res.json()
     .then(function (parsedData) {
       const nextPage = parsedData.next;
-      const data = parsedData.results;
+      // nextPagex(nextPage);
+      const data = parsedData.results; // data de los personajes
       templateCard(data);
+    })
+};
+
+function nextPagex(url) {
+  fetch(url)
+    .then(function (response) {
+      return response.json()
+    }).then(function (parsedData) {
+      const data = parsedData.results; // data de los personajes
+      const urlNext = parsedData.next; // pagina siguiente
+      if (urlNext == null) {
+        console.log('ya no hay más sgte');
+      } else {
+        nextPagex(urlNext);
+        templateCard(data);
+      }
+    })
+    .catch(function (error) {
+      console.log(error);
     })
 }
 
 function templateCard(data) {
-  for (let i in data) {
+  for (let i = 0; i < data.length; i++) {
     const name = data[i].name;
     const url = data[i].url;
+
     containerResults.append(`
     <div class="column card-js">
       <div class="ui fluid card" data-url="${url}">
         <div class="image">
-          <img src="assets/images/image.png">
+          <img src="https://starwars-visualguide.com/assets/img/characters/${i+1}.jpg">
         </div>
         <div class="content">
           <a class="header">${name}</a>
@@ -48,13 +69,9 @@ function templateCard(data) {
   }
 }
 
-function displayErrors(err) {
-  console.log("INSIDE displayErrors!");
-  console.log(err);
-}
-
 function modalShow() {
   const card = $('.card');
+  // console.log(card);
   card.on('click', function () {
     var url = $(this).data('url');
     fetch(url)
@@ -73,6 +90,7 @@ function showDataModal(res) {
 function data(dataModal) {
   // Selectores
   const headerModal = $('#header-modal-js');
+  const imageModal = $('#image-modal-js');
   const birthYear = $('#birth-year');
   const eyeColor = $('#eye-color');
   const gender = $('#gender');
@@ -81,6 +99,7 @@ function data(dataModal) {
   const mass = $('#mass');
   const skinColor = $('#skin-color');
   // value API
+  /* imageModal.attr("src",""); */
   birthYear.text(dataModal.birth_year);
   headerModal.text(dataModal.name);
   eyeColor.text(dataModal.eye_color);
@@ -107,4 +126,9 @@ function searchCharacter() {
           .then(modalShow);
       });
   });
+}
+
+function displayErrors(err) {
+  console.log("INSIDE displayErrors!");
+  console.log(err);
 }

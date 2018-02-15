@@ -34,7 +34,7 @@ function parseJSON(res) {
         <div class="column">
           <div class="ui fluid card" data-url="${url}">
             <div class="image">
-              <img src="">
+              <img src="assets/images/image.png">
             </div>
             <div class="content">
               <a class="header">${name}</a>
@@ -68,9 +68,29 @@ function getInfo(idPeople) {
 function updateInfo(res) {
   return res.json()
     .then(function (parsedData) {
-      const name = parsedData.name;
-      const headerModal = $('.ui.modal>.header:not(.ui)');
-      headerModal.text(name);
+      data(parsedData);
       $('.ui.modal').modal('show');
     });
+}
+
+function data(dataModal) {
+  console.log(dataModal);
+  // Selectores
+  const headerModal = $('.ui.header');
+  const birthYear = $('#birth-year');
+  const eyeColor = $('#eye-color');
+  const gender = $('#gender');
+  const hairColor = $('#hair-color');
+  const height = $('#height');
+  const mass = $('#mass');
+  const skinColor = $('#skin-color');
+  // value API
+  birthYear.text(dataModal.birth_year);
+  headerModal.text(dataModal.name);
+  eyeColor.text(dataModal.eye_color);
+  gender.text(dataModal.gender);
+  hairColor.text(dataModal.hair_color);
+  height.text(dataModal.height);
+  mass.text(dataModal.mass);
+  skinColor.text(dataModal.skin_color);
 }

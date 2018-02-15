@@ -57,7 +57,7 @@ function modalShow() {
   const card = $('.card');
   card.on('click', function () {
     var url = $(this).data('url');
-    fetch(idPeople)
+    fetch(url)
       .then(showDataModal);
   });
 }

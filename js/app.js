@@ -12,6 +12,7 @@ $(document).ready(function () {
     .then(modalShow)
     .then(searchCharacter)
     .catch(displayErrors);
+  $('#search-character-js').focus();
 });
 
 function handleErrors(res) {

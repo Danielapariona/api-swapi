@@ -72,7 +72,7 @@ function showDataModal(res) {
 
 function data(dataModal) {
   // Selectores
-  const headerModal = $('.ui.header');
+  const headerModal = $('#header-modal-js');
   const birthYear = $('#birth-year');
   const eyeColor = $('#eye-color');
   const gender = $('#gender');

@@ -1,15 +1,10 @@
 header {
   padding: 2rem;
-  background-color: #40C7CA;
   background-image: url("../assets/images/background.gif");
 }
 
 body {
   background-color: #efefef;
-}
-
-.ui.header {
-  color: white;
 }
 
 .brand-img {

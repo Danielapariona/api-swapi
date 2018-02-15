@@ -10,6 +10,7 @@ $(document).ready(function () {
     .then(handleErrors)
     .then(parseJSON)
     .then(modalShow)
+    .then(searchCharacter)
     .catch(displayErrors);
 });
 
@@ -25,23 +26,26 @@ function parseJSON(res) {
     .then(function (parsedData) {
       const nextPage = parsedData.next;
       const data = parsedData.results;
-      // console.log(data);
-      for (let i in data) {
-        const name = data[i].name;
-        const url = data[i].url;
-        containerResults.append(`
-        <div class="column card-js">
-          <div class="ui fluid card" data-url="${url}">
-            <div class="image">
-              <img src="assets/images/image.png">
-            </div>
-            <div class="content">
-              <a class="header">${name}</a>
-            </div>
-          </div>
-        </div>`);
-      }
+      templateCard(data);
     })
+}
+
+function templateCard(data) {
+  for (let i in data) {
+    const name = data[i].name;
+    const url = data[i].url;
+    containerResults.append(`
+    <div class="column card-js">
+      <div class="ui fluid card" data-url="${url}">
+        <div class="image">
+          <img src="assets/images/image.png">
+        </div>
+        <div class="content">
+          <a class="header">${name}</a>
+        </div>
+      </div>
+    </div>`);
+  }
 }
 
 function displayErrors(err) {
@@ -53,17 +57,12 @@ function modalShow() {
   const card = $('.card');
   card.on('click', function () {
     var url = $(this).data('url');
-    console.log(url);
-    getInfo(url);
+    fetch(idPeople)
+      .then(showDataModal);
   });
 }
 
-function getInfo(idPeople) {
-  fetch(idPeople)
-    .then(updateInfo);
-}
-
-function updateInfo(res) {
+function showDataModal(res) {
   return res.json()
     .then(function (parsedData) {
       data(parsedData);
@@ -72,7 +71,6 @@ function updateInfo(res) {
 }
 
 function data(dataModal) {
-  // console.log(dataModal);
   // Selectores
   const headerModal = $('.ui.header');
   const birthYear = $('#birth-year');
@@ -94,38 +92,19 @@ function data(dataModal) {
 }
 
 function searchCharacter() {
-  $('#btn-search-js').on('click', function () {
+  $('#search-character-js').on('input', function () {
     const valueSearch = $('#search-character-js').val();
     const search = `https://swapi.co/api/people/?search=${valueSearch}`;
-    // https://swapi.co/api/people/?search=luke
     fetch(search)
       .then(function (res) {
         return res.json()
           .then(function (parsedData) {
-            // console.log(parsedData.results);
-            const data = parsedData.results
-            for (let i in data) {
-              console.log(data[i]);
-              const name = data[i].name;
-              const url = data[i].url;
-              const $elements = $('.card-js');
-              $elements.detach();
-              containerResults.append(`
-              <div class="column card-js">
-                <div class="ui fluid card" data-url="${url}">
-                  <div class="image">
-                    <img src="assets/images/image.png">
-                  </div>
-                  <div class="content">
-                    <a class="header">${name}</a>
-                  </div>
-                </div>
-              </div>`);
-            }
+            const data = parsedData.results;
+            const $elements = $('.card-js');
+            $elements.detach();
+            templateCard(data);
           })
           .then(modalShow);
       });
   });
 }
-
-searchCharacter();

@@ -1,5 +1,6 @@
 // https://swapi.co/api/people/?page=1
 const url = 'https://swapi.co/api/people/';
+let numbCharacter = '';
 
 const containerResults = $('.results-swapi-js');
 const buttonNext = $('.next-js');
@@ -9,7 +10,7 @@ $(document).ready(function () {
   fetch(url)
     .then(handleErrors)
     .then(parseJSON)
-    .then(modalShow)
+    /* .then(modalShow) */
     .then(searchCharacter)
     .catch(displayErrors);
   $('#search-character-js').focus();
@@ -25,8 +26,10 @@ function handleErrors(res) {
 function parseJSON(res) {
   return res.json()
     .then(function (parsedData) {
+      numbCharacter = parsedData.count;
       const nextPage = parsedData.next;
-      // nextPagex(nextPage);
+      console.log(nextPage);
+      nextPagex(nextPage);
       const data = parsedData.results; // data de los personajes
       templateCard(data);
     })
@@ -60,7 +63,8 @@ function templateCard(data) {
     <div class="column card-js">
       <div class="ui fluid card" data-url="${url}">
         <div class="image">
-          <img src="https://starwars-visualguide.com/assets/img/characters/${i+1}.jpg">
+          <!-- <img src="https://starwars-visualguide.com/assets/img/characters/${i+1}.jpg"> -->
+          <img src="assets/images/image.png">
         </div>
         <div class="content">
           <a class="header">${name}</a>
@@ -71,13 +75,13 @@ function templateCard(data) {
 }
 
 function modalShow() {
-  const card = $('.card');
-  // console.log(card);
-  card.on('click', function () {
+  /* const card = $('.card');
+  console.log(card);
+  card.on('click', function () { */
     var url = $(this).data('url');
     fetch(url)
       .then(showDataModal);
-  });
+  /* }); */
 }
 
 function showDataModal(res) {
@@ -133,3 +137,5 @@ function displayErrors(err) {
   console.log("INSIDE displayErrors!");
   console.log(err);
 }
+
+$(document).on('click', '.card', modalShow);

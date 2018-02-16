@@ -58,13 +58,15 @@ function templateCard(data) {
   for (let i = 0; i < data.length; i++) {
     const name = data[i].name;
     const url = data[i].url;
-
+    const arrayUrl = url.split('/');
+    const codeImage = arrayUrl[5];
+    // console.log(codeImage);
     containerResults.append(`
     <div class="column card-js">
-      <div class="ui fluid card" data-url="${url}">
+      <div class="ui fluid card" data-url="${url}" data-image="${codeImage}">
         <div class="image">
-          <!-- <img src="https://starwars-visualguide.com/assets/img/characters/${i+1}.jpg"> -->
-          <img src="assets/images/image.png">
+          <img src="https://starwars-visualguide.com/assets/img/characters/${codeImage}.jpg">
+          <!-- <img src="assets/images/image.png"> -->
         </div>
         <div class="content">
           <a class="header">${name}</a>
@@ -79,6 +81,9 @@ function modalShow() {
   console.log(card);
   card.on('click', function () { */
     var url = $(this).data('url');
+    var codeImage = $(this).data('image');
+    $('#image-modal-js').attr('src', `https://starwars-visualguide.com/assets/img/characters/${codeImage}.jpg`);
+    console.log(codeImage);
     fetch(url)
       .then(showDataModal);
   /* }); */

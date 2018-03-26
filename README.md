@@ -1,6 +1,7 @@
-# SWAPI
+# Swapi
+Swapi, te permite ver la información de todos los personajes de Start Wars al hacer click, también puedes usar el buscador para encontrar más rápido a tu personaje.
 
-> Recuerda seguir siempre esta [guía de estilos](https://github.com/Laboratoria/js-style-guide/)
+![swapi-preview](https://user-images.githubusercontent.com/4741745/37883904-dcfe6186-3072-11e8-9a8e-d9299cbc3e7d.png)
 
-Que la fuerza te acompañe en este ejercicio, revisa las siguientes slides para que puedas crear esta fenómenal app para los amantes de Star Wars.
-
+## Desarrollado para 
+[Laboratoria](http://laboratoria.la)
